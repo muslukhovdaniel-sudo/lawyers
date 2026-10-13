@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="java.js"></script>
+  <title>Адвокат.net</title>
+</head>
+<body>
+  <header>
+  <nav>
+    <ul>
+      <li><a href="#block_1">Главная</a></li>
+      <li><a href="#onas">О нас</a></li>
+      <li><a href="#lawyers">Популярные адвокаты</a></li>
+      <li><a href="#reg">Наши контакты</a></li>
+      <li><button id="theme-toggle">🌙</button></li>
+    </ul>
+  </nav>
+</header>
+  <main>
+    <article>
+    <section>
+      <div class="block_1">
+        <h1 id="block_1">Кто мы такие?</h1>
+        <p id="slogan">Защита ваших прав - наша профессия</p>
+        <p id="regular_text">Официальное юридическое бюро по защите прав граждан и бизнеса. Профессиональные адвокаты с реальным опытом побед в судах общей юрисдикции и арбитраже.</p>
+        <a href="#registration"><button id="frts_btn" type="submit">Получить консультацию</button></a>
+        <a href="#" target="_blank" rel="noopener noreferrer"><button id="sec_btn" type="button">Узнать больше</button></a>
+      </section>
+      </div>
+    <section id="onas">
+      <div class="block_2">
+      <h2 >О нас</h2>
+        <p>Мы объединили практикующих адвокатов с многолетним опытом, чтобы каждый гражданин мог получить квалифицированную и честную юридическую помощь. Наша цель — не просто вести дело, а восстановить справедливость и минимизировать ваши риски. Мы работаем строго по договору, гарантируем адвокатскую тайну и прозрачное ценообразование без скрытых комиссий.</p>
+     </div>
+
+    </section>
+    <section id="lawyers">
+      <h2>Популярные адвокаты</h2>
+      <p>Александр Морозов — Специализация: Уголовное право, экономические преступления. Стаж: 14 лет. Выигранных дел: более 250.</p>
+      <p>Елена Смирнова — Специализация: Гражданские споры, защита прав потребителей, семейное право. Стаж: 11 лет. Выигранных дел: более 300.</p>
+      <p>Дмитрий Васильев — Специализация: Арбитраж, корпоративное право, защита бизнеса. Стаж: 18 лет. Выигранных дел: более 400.</p>
+    </section>
+    <section>
+      <h2>Наши контакты</h2>
+      <p>Телефон: +7 (800) 555-35-35 (круглосуточная линия)</p>
+      <p>Email: info@pravo-defense.ru</p>
+      <p>Адрес офиса: г. Москва, ул. Тверская, д. 12, офис 405</p>
+      <p>Режим работы: Пн–Пт с 9:00 до 20:00, Сб — по предварительной записи</p>
+    </section>
+    <section id="reg">
+      <div class="registration" id="registration">
+        <p>Введите ваши данные для получения консультации</p>
+        <form>
+          <label for="reg_name" >Имя:</label>
+          <input type="text" name="name" id="reg_name" required placeholder="Иван">
+          <label for="reg_surname">Фамилия:</label>
+          <input type="text" name="surname" id="reg_surname" required placeholder="Иванов">
+          <label for="reg_phone">Номер телефона:</label>
+          <input type="phone" name="phone" id="reg_phone" pattern="^[0-9+\-\(\) ]*$" required placeholder="+792734834934">
+          <label for="reg_email">Почта:</label>
+          <input type="email" name="email" id="reg_email" required placeholder="example@gmail.com">
+          <button type="submit">Отправить</button>
+        </form>
+      </div>
+    </section>
+    <aside>
+      
+    </aside>
+  </article>
+  </main>
+  
+<footer>
+  <nav>
+    <ul>
+      <li><a href="БАЗА_АДВОТКАТОВ.html">База Адвокатов</a></li>
+      <li><a href="КАЛЬКУЛЯТОР_СТОИМОСТИ.html">Стоимость и калькулатор услуг</a></li>
+      <li><a href="ОТВЕТЫ НА ВОПРОСЫ.html">FAQ, ответы на интересующие вас вопросы</a></li>
+    </ul>
+  </nav>
+</footer>
+</body>
+</html>

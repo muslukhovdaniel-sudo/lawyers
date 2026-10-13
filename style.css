@@ -1,0 +1,671 @@
+/* ==========================================================================
+   1. ПЕРЕМЕННЫЕ И ПАЛИТРА
+   ========================================================================== */
+:root {
+  --bg-main: #0b0f19;          /* Тёмный основной фон */
+  --bg-card: #131824;          /* Фон карточек */
+  --bg-card-hover: #1a2130;    
+  --accent-gold: #cba876;      /* Золотой акцент */
+  --accent-gold-hover: #e0be8d;
+  --text-main: #f8fafc;        /* Цвет заголовков */
+  --text-muted: #94a3b8;       /* Цвет обычного текста */
+  --border-soft: rgba(203, 168, 118, 0.2); 
+  --border-divider: rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-overlay: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.96));
+}
+
+/* Перезапись переменных для мягкой Светлой темы */
+body.white-theme {
+  --bg-main: #eef2f6;          /* Мягкий светлый оттенок */
+  --bg-card: #ffffff;          /* Белоснежные карточки */
+  --bg-card-hover: #f8fafc;    
+  --accent-gold: #a87e45;      
+  --accent-gold-hover: #8f6935;
+  --text-main: #0f172a;        /* Четкий темный текст */
+  --text-muted: #475569;       
+  --border-soft: rgba(168, 126, 69, 0.3); 
+  --border-divider: rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --bg-overlay: linear-gradient(rgba(238, 242, 246, 0.90), rgba(238, 242, 246, 0.95));
+}
+
+/* Глобальный сброс */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ==========================================================================
+   ФОНОВОЕ ИЗОБРАЖЕНИЕ СТРАНИЦЫ
+   ========================================================================== */
+body {
+  background-color: var(--bg-main);
+  background-image: var(--bg-overlay), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.7;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ==========================================================================
+   2. ШАПКА И НАВИГАЦИЯ
+   ========================================================================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-divider);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+header nav ul {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+header a {
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+header a:hover {
+  background: var(--bg-card-hover);
+  color: var(--accent-gold);
+}
+
+/* Кнопка переключения темы */
+#theme-toggle {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+  border: 1px solid var(--border-soft);
+  padding: 0.5rem 0.9rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#theme-toggle:hover {
+  background: var(--accent-gold);
+  color: #fff;
+  border-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   3. ОБЩИЕ ЗАГОЛОВКИ И КАРТОЧКИ С ДАННЫМИ
+   ========================================================================== */
+main {
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 2rem;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  font-weight: 600;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-gold);
+  margin: 0.8rem auto 0 auto;
+  border-radius: 2px;
+}
+
+.block_1, .block_2, #main_inf, #text, section:not(#lawyers):not(#reg):has(p:not([id])) {
+  background: var(--bg-card);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-divider);
+  margin-bottom: 3.5rem;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+}
+
+.block_1 {
+  text-align: center;
+}
+
+#slogan {
+  font-size: 1.3rem;
+  color: var(--accent-gold);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#regular_text, .block_2 p, #text p, #main_inf p, section > p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 850px;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
+}
+
+/* Кнопки */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+}
+
+#frts_btn, .registration button {
+  background: var(--accent-gold);
+  color: #ffffff;
+}
+
+#frts_btn:hover, .registration button:hover {
+  background: var(--accent-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 126, 69, 0.3);
+}
+
+#sec_btn {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-divider);
+  margin-left: 1rem;
+}
+
+#sec_btn:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Форма */
+.registration {
+  background: var(--bg-card);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-soft);
+  max-width: 550px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-card);
+}
+
+.registration p {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.registration form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.registration label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: -0.8rem;
+  margin-left: 0.4rem;
+}
+
+.registration input {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-divider);
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.registration input:focus {
+  border-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   4. СЕТКА АДВОКАТОВ И СЛАЙДЕР
+   ========================================================================== */
+#lawyers {
+  margin-bottom: 3.5rem;
+}
+
+/* Сетка на главной странице (Page 1) */
+#lawyers:not(:has(.slide)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+#lawyers:not(:has(.slide)) h2 {
+  grid-column: 1 / -1; 
+}
+
+#lawyers:not(:has(.slide)) > p {
+  background: var(--bg-card);
+  border: 1px solid var(--border-divider);
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: var(--text-muted);
+  text-align: left;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+}
+
+#lawyers:not(:has(.slide)) > p:hover {
+  transform: translateY(-5px);
+}
+
+/* Карточки адвокатов на главной странице (Page 1) */
+#lawyers:not(:has(.slide)) > p::before {
+  content: '';
+  display: block;
+  height: 260px;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  background-size: cover;
+  background-position: center 20%; /* Смещаем фокус на уровень глаз/головы */
+  background-repeat: no-repeat;
+}
+
+/* Карточки в слайдере в Базе адвокатов (Page 2) */
+.slide > p::before {
+  content: '';
+  display: block;
+  height: 280px;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  background-size: cover;
+  background-position: center 20%; /* Смещаем фокус на уровень глаз/головы */
+  background-repeat: no-repeat;
+}
+
+/* --- Стили слайдера в БАЗЕ АДВОКАТОВ (Page 2) --- */
+.slider {
+  position: relative;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.slide {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-divider);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.slide > p {
+  background: var(--bg-card-hover);
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  border-bottom: 1px solid var(--border-divider);
+  margin: 0;
+}
+
+
+
+.slide ul {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.slide ul li {
+  background: var(--bg-main);
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Фото для карточек слайдера */
+.slide:nth-of-type(1) > p::before {
+  background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80');
+}
+.slide:nth-of-type(2) > p::before {
+  background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80');
+}
+.slide:nth-of-type(3) > p::before {
+  background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80');
+}
+
+/* Кнопки навигации слайдера */
+.perv-btn, .next-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+}
+
+.perv-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+.perv-btn:hover, .next-btn:hover {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Полностью скрываем старую картинку с корявым фоном */
+.perv-btn img, .next-btn img {
+  display: none; 
+}
+
+/* Рисуем красивые чистые стрелки прямо средствами CSS */
+.perv-btn::after {
+  content: '‹';
+  font-size: 1.8rem;
+  color: var(--text-main);
+  line-height: 1;
+  font-weight: 400;
+  margin-top: -2px;
+}
+
+.next-btn::after {
+  content: '›';
+  font-size: 1.8rem;
+  color: var(--text-main);
+  line-height: 1;
+  font-weight: 400;
+  margin-top: -2px;
+}
+
+.perv-btn:hover::after, .next-btn:hover::after {
+  color: #fff;
+}
+.perv-btn img, .next-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.perv-btn img {
+  transform: rotate(180deg);
+}
+
+.indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.indicator-item {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--border-soft);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.indicator-item.active {
+  background-color: var(--accent-gold);
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* Фото адвокатов на главной */
+#lawyers > p:nth-of-type(1)::before {
+  background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80');
+}
+#lawyers > p:nth-of-type(2)::before {
+  background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80');
+}
+#lawyers > p:nth-of-type(3)::before {
+  background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80');
+}
+
+/* ==========================================================================
+   5. ТАРИФЫ (PAGE3) И FAQ (PAGE4)
+   ========================================================================== */
+.pakets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.pakets h3 {
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  background: var(--bg-card);
+  padding: 1.8rem 1.5rem;
+  border: 1px solid var(--border-divider);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
+  margin: 0;
+}
+
+.pakets ul {
+  background: var(--bg-card);
+  padding: 0 1.5rem 1.8rem 1.5rem;
+  border: 1px solid var(--border-divider);
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  box-shadow: var(--shadow-card);
+}
+
+.pakets ul li {
+  background: var(--bg-main);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.pakets ul li p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  text-align: left;
+}
+
+.pakets ul li:last-child {
+  background: rgba(168, 126, 69, 0.08);
+  border: 1px solid var(--border-soft);
+}
+
+.pakets ul li:last-child p {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.questions h3 {
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+  background: var(--bg-card);
+  padding: 1.5rem 2rem;
+  border-radius: 16px 16px 0 0;
+  border: 1px solid var(--border-divider);
+  border-bottom: none;
+  margin: 0;
+}
+
+.questions h3::before {
+  content: 'Q.';
+  font-weight: 700;
+  margin-right: 0.8rem;
+  opacity: 0.5;
+}
+
+.questions p {
+  background: var(--bg-card);
+  padding: 0 2rem 2rem 2rem;
+  border-radius: 0 0 16px 16px;
+  border: 1px solid var(--border-divider);
+  border-top: none;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================================================
+   6. ПОДВАЛ (FOOTER)
+   ========================================================================== */
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-divider);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  color: var(--accent-gold);
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+  .pakets {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .slider {
+    padding: 0 2rem;
+  }
+
+  header nav ul, footer nav ul {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+.indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.indicator-item {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--border-soft);
+  cursor: pointer;
+  /* Плавный переход всех параметров с красивой физикой движения */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Эффект при наведении курсора на точки */
+.indicator-item:hover {
+  transform: scale(1.3);
+  background-color: var(--accent-gold);
+}
+
+/* Активная точка (ползунок) с анимацией и свечением */
+.indicator-item.active {
+  background-color: var(--accent-gold);
+  width: 35px; /* Растягивается в красивую капсулу */
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(203, 168, 118, 0.6); /* Добавляем мягкое золотое свечение */
+}
